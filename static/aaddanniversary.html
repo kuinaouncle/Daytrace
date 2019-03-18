@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>日迹 </title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- global stylesheets -->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-icon-style.css">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/selectstyle.css" media="screen" type="text/css" />
+</head>
+
+<body> 
+
+<!--====================================================
+                         MAIN NAVBAR
+======================================================-->        
+    <header class="header">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="search-box">
+                <button class="dismiss"><i class="icon-close"></i></button>
+                <form id="searchForm" action="#" role="search">
+                    <input type="search" placeholder="Search Now" class="form-control">
+                </form>
+            </div>
+            <div class="container-fluid ">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header">
+                        <a href="aindex.html" class="navbar-brand">
+                            <div class="brand-text brand-big hidden-lg-down"><img src="img/logo-white.png" alt="Logo" class="img-fluid"></div>
+                            <div class="brand-text brand-small"><img src="img/logo-icon.png" alt="Logo" class="img-fluid"></div>
+                        </a>
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                    <!-- 全屏-->
+                    <li class="nav-item d-flex align-items-center full_scr_exp"><a class="nav-link" href="#"><img src="img/expand.png" onclick="toggleFullScreen(document.body)" class="img-fluid" alt=""></a></li>
+                    <!-- 搜索-->
+                    <li class="nav-item d-flex align-items-center"><a id="search" class="nav-link" href="#"><i class="icon-search"></i></a></li>
+                    <!-- 日程提醒完成情况-->
+                    <li class="nav-item dropdown"> 
+                        <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="noti-numb-bg"></span><span class="badge">12</span></a>
+                        <ul aria-labelledby="notifications" class="dropdown-menu">
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-envelope bg-red"></i>You have 6 new messages </div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-upload bg-blue"></i>Server Rebooted</div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>
+                                        <div class="notification-time"><small>10 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
+                        </ul>
+                    </li>
+                    <!-- 消息                     -->
+                    <li class="nav-item dropdown"> <a id="messages" class="nav-link logout" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope-o"></i><span class="noti-numb-bg"></span><span class="badge">10</span></a>
+                        <ul aria-labelledby="messages" class="dropdown-menu">
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Jason Doe</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Frank Williams</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Ashley Wood</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong></a></li>
+                        </ul>
+                    </li> 
+
+                    <li class="nav-item d-flex align-items-center"><a id="menu-toggle-right" class="nav-link" href="#"><i class="fa fa-group"></i></a></li>
+                    <nav id="sidebar-wrapper">
+                      <div class="sidebar-nav"> 
+                        <div class="tab" role="tabpanel"> 
+
+                            <div class="tab-content tabs">
+                              <div role="tabpanel" class="tab-pane fade show active" id="live">
+                                <h3>我的好友</h3>
+                                <hr>
+                                <div class="list-group">
+                                      <button type="button" class="list-group-item list-group-item-action active">
+                                        爸爸
+                                      </button>
+                                      <button type="button" class="list-group-item list-group-item-action">妈妈</button>
+                                      <button type="button" class="list-group-item list-group-item-action">爷爷</button>
+                                      <button type="button" class="list-group-item list-group-item-action">奶奶</button>
+  
+                                </div>
+                              </div>
+
+                           </div>
+                      </div>
+                    </nav>
+                </ul> 
+            </div>
+        </nav>
+    </header>
+
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+
+        <!--***** SIDE NAVBAR *****-->
+        <nav class="side-navbar">
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">匿名用户</h1>
+                </div>
+            </div>
+            <hr>
+            <!-- 左侧导航栏菜单-->
+            <ul class="list-unstyled">
+                <li class="active"> <a href="aindex.html"><i class="icon-home"></i>我的主页</a></li>
+                <li><a href="#apps" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cog"></i>管理模式 </a>
+                    <ul id="apps" class="collapse list-unstyled">
+                        <li><a href="#">添加计划</a></li>  
+                        <li><a href="#">添加纪念日倒计时</a></li>
+                        <li><a href="#">日程回收站</a></li>  
+                    </ul>
+                </li>
+                <li><a href="#forms" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-book"></i>阅读模式 </a>
+                    <ul id="forms" class="collapse list-unstyled">
+                        <li><a href="#timequadrant" aria-expanded="false" data-toggle="collapse">时间象限视图</a>
+                            <ul id="timequadrant" class="collapse list-unstyled">
+                                <li><a href="#">&nbsp&nbsp&nbsp今天</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp将来一周</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp将来一个月</a></li> 
+                            </ul>
+
+                        </li> 
+                        <li><a href="#calendarview" aria-expanded="false" data-toggle="collapse">时间轴视图</a>
+                            <ul id="calendarview" class="collapse list-unstyled">
+                                <li><a href="#">&nbsp&nbsp&nbsp日计划</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp周计划</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp月计划</a></li>
+                                  
+                            </ul>
+
+                        </li>
+                        <li><a href="#">日历视图</a></li>
+                        <li><a href="form-layouts.html">最近完成</a></li>
+
+                    </ul>
+                </li>
+                <li> <a href="#"> <i class="fa fa-cogs"></i>设置 </a></li>
+
+        </nav>
+
+        <div class="content-inner chart-cont">
+
+            <!--***** CONTENT *****-->     
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!--***** USER INFO *****-->
+                    <div class="card form" id="form1">
+                        <div class="card-header">
+                            <h3><i class="fa fa-user-circle"></i> 添加纪念日</h3>
+                        </div>
+                        <br>
+                        <form>
+
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h3 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;">纪念日内容</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="ptitle">纪念日标题</label>
+                                        <input type="text" class="form-control" id="ptitle" aria-describedby="emailHelp" placeholder="日程标题，不超过80个字符">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">  
+
+                                    <div class="form-group has-success">
+                                        <label for="description">纪念日描述</label>
+                                        <textarea name="description" class="form-control" id="description" cols="30" rows="4"></textarea> 
+<!--                                         <div class="valid-feedback">
+                                            Please provide a valid email.
+                                        </div> -->
+                                    </div>  
+                                </div>
+
+                          
+                            </div>
+
+                            <div class="row mt-4">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="example-datetime-local-input">选择日期</label>
+
+
+                                            <input class="form-control" type="date" value="2018-12-01" id="example-date-input" style="max-width: 40rem;">
+
+                                    </div>
+                                </div>
+                            </div> 
+
+
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox">&nbsp&nbsp是否提醒
+                                    </label>
+                                </div>
+                                <div class="col-md-12" style="margin-top: 20px ">
+                                    <div class="form-group">
+                                        <label for="example-datetime-local-input">选择提醒时间</label>
+                                             <input class="form-control" type="datetime-local" value="2018-12-01T12:00:00" id="example-datetime-local-input" style="max-width: 40rem;">
+
+
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="submit" class="btn btn-general btn-blue mr-2">添加纪念日</button>  
+                            <button type="reset" class="btn btn-general btn-white">重置</button> 
+                        </form>
+                    </div>
+
+
+
+            </div> 
+
+            </div> 
+
+        </div>
+    </div> 
+
+    <!--Global Javascript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.validate.min.js"></script> 
+    <script src="js/chart.min.js"></script> 
+    <script src="js/front.js"></script> 
+    
+    <!--Core Javascript -->
+<!--       <script src="js/jquery.js"></script> -->
+
+      <script src="js/selectindex.js"></script>
+</body>
+
+</html>

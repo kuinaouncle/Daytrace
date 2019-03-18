@@ -1,0 +1,247 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/pages/faq.css' %}">
+{% endblock corecss %}
+
+
+{% block page_content %}
+    <div class="chart-cont">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="border-bottom: 2px solid #009966;width: 100%;">
+                <li class="breadcrumb-item"><a >{{ nameofuser }}的主页</a></li>
+                <li class="breadcrumb-item"><a >阅读模式</a></li>
+                <li class="breadcrumb-item"><a >时间象限视图</a></li>
+                <li class="breadcrumb-item active" aria-current="page">未来一个月</li>
+              </ol>
+            </nav>
+
+
+
+        </div>
+        <div class="row">
+            <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 50px">
+              <button type="button" class="btn" style="background-color: rgba(51,204,255,0.4);width: 150px">为好友添加日程</button>
+              <button type="button" class="btn" style="background-color: rgba(255,204,153,0.4);width: 150px">发消息提醒好友</button>
+              <button type="button" class="btn" style="background-color: rgba(153,153,255,0.4);width: 150px">评论日程</button>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px">
+              <div class="row">
+
+
+                <div class="col-md-12" >
+                    <div class="faq-cont" id="FAQ1">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: red"> 很重要很紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-1">
+
+                            {% for plan in userplanp0 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-2" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h5 class="panel-title">
+                                                {% if plan.plantype == 0 %}
+                                                    日计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 1 %}
+                                                    周计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 2 %}
+                                                    月计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 3 %}
+                                                    自定义计划&nbsp
+                                                {% endif %}
+
+
+                                            <small>{{ plan.startdate|date:"Y年m月d日" }}</small>&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+
+                                            <span class="pull-right" style="font-size: 18px">
+
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ2">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: orange"> 很重要不紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-2">
+
+                            {% for plan in userplanp1 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-1" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h5 class="panel-title">
+                                                {% if plan.plantype == 0 %}
+                                                    日计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 1 %}
+                                                    周计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 2 %}
+                                                    月计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 3 %}
+                                                    自定义计划&nbsp
+                                                {% endif %}
+
+
+                                            <small>{{ plan.startdate|date:"Y年m月d日" }}</small>&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+
+                                            <span class="pull-right" style="font-size: 18px">
+
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ3">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: blue"> 不重要很紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-3">
+
+                            {% for plan in userplanp2 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-3" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h5 class="panel-title">
+                                                {% if plan.plantype == 0 %}
+                                                    日计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 1 %}
+                                                    周计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 2 %}
+                                                    月计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 3 %}
+                                                    自定义计划&nbsp
+                                                {% endif %}
+
+
+                                            <small>{{ plan.startdate|date:"Y年m月d日" }}</small>&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+
+                                            <span class="pull-right" style="font-size: 18px">
+
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ4">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: green"> 不重要不紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-4">
+
+                            {% for plan in userplanp3 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-4" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h5 class="panel-title">
+                                                {% if plan.plantype == 0 %}
+                                                    日计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 1 %}
+                                                    周计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 2 %}
+                                                    月计划&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                {% elif plan.plantype == 3 %}
+                                                    自定义计划&nbsp
+                                                {% endif %}
+
+
+                                            <small>{{ plan.startdate|date:"Y年m月d日" }}</small>&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+
+                                            <span class="pull-right" style="font-size: 18px">
+
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock page_content %}
+
+{% block corejs %}
+        <script>
+        (function($) {
+
+            var mn = $(".vert-tab");
+            mns = "vert-tab-scrolled";
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > $('header').height()) {
+                    mn.addClass(mns);
+                } else {
+                    mn.removeClass(mns);
+                }
+            });
+
+            "use strict";
+            $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
+              if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)
+              {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                  $('html, body').animate({
+                    scrollTop: (target.offset().top - 22)
+                  }, 700, "easeInOutExpo");
+                  return false;
+                }
+              }
+            });
+
+            $('.collapse').on('show.bs.collapse', function() {
+                var id = $(this).attr('id');
+                $('a[href="#' + id + '"]').closest('.panel-heading').addClass('active-faq');
+                $('a[href="#' + id + '"] .panel-title span').html('<i class="fa fa-minus"></i>');
+            });
+            $('.collapse').on('hide.bs.collapse', function() {
+                var id = $(this).attr('id');
+                $('a[href="#' + id + '"]').closest('.panel-heading').removeClass('active-faq');
+                $('a[href="#' + id + '"] .panel-title span').html('<i class="fa fa-plus"></i>');
+            });
+
+        })(jQuery);
+    </script>
+{% endblock corejs %}

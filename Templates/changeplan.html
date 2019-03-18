@@ -1,0 +1,313 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/selectstyle.css' %}" media="screen" type="text/css" />
+{% endblock corecss %}
+
+
+{% block page_content %}
+
+    <div class="row">
+
+                <div class="col-md-12">
+
+                    <!--***** USER INFO *****-->
+                    <div class="card form" id="form1">
+                        <div class="card-header">
+                            <h3><i class="fa fa-user-circle"></i> 修改日程</h3>
+                        </div>
+                        <br>
+                        <form method="post" action="addplan_check/">
+
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h3 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;">日程内容</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="ptitle">标题</label>
+                                        <input type="text" name="plantitle" class="form-control" id="ptitle" aria-describedby="emailHelp" placeholder="日程标题，不超过80个字符">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="form-group has-success">
+                                        <label for="description">日程描述</label>
+                                        <textarea name="description" class="form-control" id="description" cols="30" rows="4"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ptitle">时间象限</label>
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                              <div class="btn-group btn-group-toggle mr-2" role="group" data-toggle="buttons" id="prioritybuttongroup">
+                                                    <label class="btn btn-secondary active">
+                                                        <input type="radio" name="priority" id="importanturgent" autocomplete="off" value="0" checked/>很重要很紧急
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="priority" id="importantnoturgent" autocomplete="off" value="1"/>很重要不紧急
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="priority" id="unimportanturgent" autocomplete="off" value="2"/>不重要很紧急
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="priority" id="unimportantnoturgent" autocomplete="off" value="3"/>不重要不紧急
+                                                    </label>
+
+                                              </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="margin: 20px auto 30px 20px;color:#888888">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="isshowtofriendscheckbox" id="isshowtofriendscheckbox">&nbsp&nbsp是否向好友展示这个日程
+                                    </label>
+                                </div>
+{#                                 <div class="col-md-6">#}
+{#                                    <div class="form-group">#}
+{#                                        <label for="ptitle">选择颜色以区分</label>#}
+{#                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">#}
+{#                                              <div class="btn-group mr-2" role="group">#}
+{#                                                    <button type="button" class="btn" style="background-color: #000000"> </button>#}
+{#                                                    <button type="button" class="btn" style="background-color: #663300"> </button>#}
+{#                                                    <button type="button" class="btn btn-primary"> </button>#}
+{#                                                    <button type="button" class="btn btn-success"> </button>#}
+{#                                                    <button type="button" class="btn btn-secondary"> </button>#}
+{#                                                    <button type="button" class="btn btn-info"> </button>#}
+{#                                                    <button type="button" class="btn btn-dark"> </button>#}
+{#                                              </div>#}
+{##}
+{##}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h3 style="border-bottom: 1px solid #ddd;padding-bottom: 10px;">日程时间</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                          <li class="nav-item">
+                                            <a class="nav-link active" id="day-tab" data-toggle="tab" href="#day" role="tab" aria-controls="day" aria-selected="true">日计划</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="week-tab" data-toggle="tab" href="#week" role="tab" aria-controls="week" aria-selected="false">周计划</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="false">月计划</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="custom-tab" data-toggle="tab" href="#custom" role="tab" aria-controls="custom" aria-selected="false">自定义计划</a>
+                                          </li>
+                                    </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                              <div class="tab-pane fade show active" id="day" role="tabpanel" aria-labelledby="day-tab">
+                                                  <div class="col-md-6" style="margin: 20px auto 10px 20px">
+                                                        <div class="form-group row">
+                                                            <label for="example-date-input" style="width: 85px;" class=" col-form-label">选择日期</label>
+                                                            <div class="col-9">
+                                                                <input class="form-control" type="date" name="dateofdateplan" value="2018-12-01" id="dateofdateplan">
+                                                            </div>
+                                                        </div>
+                                                  </div>
+                                                   <div class="col-md-6" style="margin: 20px auto 10px 20px">
+                                                        <div class="form-group row">
+                                                            <label for="example-time-input" style="width: 85px;" class=" col-form-label">选择时间</label>
+                                                            <div class="col-9">
+                                                                <input class="form-control" type="time" name="timeofdateplan" value="12:00:00" id="timeofdateplan">
+                                                            </div>
+                                                        </div>
+                                                  </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="week" role="tabpanel" aria-labelledby="week-tab">
+                                                    <div class="col-md-6" style="margin: 20px auto 10px 20px">
+                                                        <div class="form-group row">
+                                                            <label for="example-week-input" style="width: 85px;" class=" col-form-label">选择星期</label>
+                                                            <div class="col-9">
+                                                                <input class="form-control" type="week" name="weekofweekplan" value="2018-W48" id="weekofweekplan">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
+                                                    <div class="col-md-6" style="margin: 20px auto 10px 20px">
+                                                        <div class="form-group row">
+                                                            <label for="example-month-input" style="width: 85px;" class=" col-form-label">选择月份</label>
+                                                            <div class="col-9">
+                                                                <input class="form-control" type="month" name="monthofmonthplan" value="2018-12" id="monthofmonthplan">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="custom" role="tabpanel" aria-labelledby="custom-tab">
+                                                    <div class="col-md-6" style="margin: 20px auto 10px 20px">
+
+                                                                <div class="form-group row">
+
+                                                                    <label for="example-month-input" style="width: 85px;" class=" col-form-label">选择时间段</label>
+                                                                    <div class="col-9">
+                                                                        <select class="custom-date form-control" id="customdateselect1">
+                                                                          <option selected="selected" value="7">7 天</option>
+                                                                          <option value="30">30 天</option>
+                                                                          <option value="90">90 天</option>
+                                                                          <option value="180">180 天</option>
+                                                                          <option value="365">365 天</option>
+                                                                          <option value="custom">自定义</option>
+                                                                        </select>
+                                                                        <input name="customdateselect" value="" id="customdateinput" style="display: none">
+                                                                    </div>
+{#                                                                    <div class="col-md-12 first-button" id="addcustomplandaterow" style="margin: 20px auto 10px 0">#}
+{#                                                                        <button type="button" class="btn btn-primary" id="addcustomplandate">添加时间</button>#}
+{##}
+{#                                                                    </div>#}
+
+                                                                </div>
+
+                                                    </div>
+                                              </div>
+                                        </div>
+                                </div><input name="plantypeselect" value="day" id="plantypeselect" style="display: none">
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h3 style="border-bottom: 1px solid #ddd;padding-bottom: 10px">日程提醒</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12" style="margin: 20px auto 30px 20px;color:#888888">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="isremindcheckbox" id="isremindcheckbox">&nbsp&nbsp是否提醒
+                                    </label>
+                                </div>
+                                <div class="col-md-12" style="margin: 20px auto 30px 30px;display: none" id="remindchoosetime">
+                                    <div class="form-group row">
+                                        <label for="example-datetime-local-input" style="width: 85px;" class=" col-form-label">提醒时间</label>
+                                        <div class="col-6">
+                                            <input class="form-control" type="datetime-local" name="timeofremind" value="2018-12-01T12:00:00" id="example-datetime-local-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-general btn-blue mr-2" id="addplan">添加日程</button>
+                            <button type="reset" class="btn btn-general btn-white" id="planreset">重置</button>
+                            <div style="color: green;margin-top: 10px;display: none" id="plansuccessmsg">添加成功！</div>
+                            <div style="display: none" id="issuccessful">{{ issuccessful }}</div>
+                        </form>
+                    </div>
+
+
+
+            </div>
+
+            </div>
+                <div id="title_in_plan" style="display:none;">{{ plan.title }}</div>
+                <div id="content_in_plan" style="display: none">{{ plan.content }}</div>
+                {% if plan.plantype == 0 %}
+                    <div id="day_date_in_plan" style="display: none">{{ plan.startdatetime|date:"Y-m-d" }}</div>
+                    <div id="day_time_in_plan" style="display: none">{{ plan.startdatetime|date:"H:i" }}</div>
+                {# 周、月、自定义 #}
+                {% endif %}
+{% endblock page_content %}
+
+{% block corejs %}
+    <script src="{% static 'js/selectindex.js' %}"></script>
+    <script>
+        var idofselect = 2;
+        $("#addplan").click(function (e) {
+            var customdate = $("#customdateselect1 option:selected").text();
+            $("#customdateinput").val(customdate);
+
+            {# 检查 #}
+            if(document.getElementById("ptitle").value=="")
+            {
+                e.preventDefault();
+                $("#planerrmsg").remove();
+                $("#planreset").after("<div style=\"color: red;margin-top: 10px\" id=\"planerrmsg\">请至少填写日程标题和日程日期</div>");
+            }
+
+            if(document.getElementById("dateofdateplan").value==""&&document.getElementById("plantypeselect").value=="day")
+            {
+                e.preventDefault();
+                $("#planerrmsg").remove();
+                $("#planreset").after("<div style=\"color: red;margin-top: 10px\" id=\"planerrmsg\">你选择了日计划，请至少选择日程日期</div>");
+            }
+            if(document.getElementById("weekofweekplan").value==""&&document.getElementById("plantypeselect").value=="week")
+            {
+                e.preventDefault();
+                $("#planerrmsg").remove();
+                $("#planreset").after("<div style=\"color: red;margin-top: 10px\" id=\"planerrmsg\">你选择了周计划，请选择日程时间</div>");
+            }
+            if(document.getElementById("monthofmonthplan").value==""&&document.getElementById("plantypeselect").value=="month")
+            {
+                e.preventDefault();
+                $("#planerrmsg").remove();
+                $("#planreset").after("<div style=\"color: red;margin-top: 10px\" id=\"planerrmsg\">你选择了月计划，请选择日程时间</div>");
+            }
+            if(document.getElementById("customdateinput").value.indexOf("天")!=-1&&document.getElementById("plantypeselect").value=="custom")
+            {
+                e.preventDefault();
+                $("#planerrmsg").remove();
+                $("#planreset").after("<div style=\"color: red;margin-top: 10px\" id=\"planerrmsg\">你选择了自定义计划，请选择日程日期</div>");
+            }
+        });
+        {# 切换计划类型 #}
+        $("#day-tab").click(function () {
+            $("#plantypeselect").val("day");
+        });
+        $("#week-tab").click(function () {
+            $("#plantypeselect").val("week");
+        });
+        $("#month-tab").click(function () {
+            $("#plantypeselect").val("month");
+        });
+        $("#custom-tab").click(function () {
+            $(".drp-popup").hide();
+            $("#plantypeselect").val("custom");
+        });
+        {# 是否提醒切换 #}
+        $("#isremindcheckbox").change(function () {
+            $("#remindchoosetime").toggle();
+        });
+        if(document.getElementById("issuccessful").innerHTML=="true")
+        {
+            alert("添加成功");
+            setTimeout(function(){window.location.href = '/user/';},500);
+        }
+
+
+        {#$("#addcustomplandate").click(function () {#}
+        {#    $("#addcustomplandaterow").before("<div class=\"form-group row\">\n" +#}
+        {#        "<label for=\"example-month-input\" style=\"width: 85px;\" class=\" col-form-label\">选择时间段</label>\n" +#}
+        {#        "    <div class=\"col-9\">\n" +#}
+        {#        "        <select class=\"custom-date form-control\" id=\"customdateselect"+idofselect+"\">\n" +#}
+        {#        "          <option selected=\"selected\" value=\"7\">7 天</option>\n" +#}
+        {#        "          <option value=\"30\">30 天</option>\n" +#}
+        {#        "          <option value=\"90\">90 天</option>\n" +#}
+        {#        "          <option value=\"180\">180 天</option>\n" +#}
+        {#        "          <option value=\"365\">365 天</option>\n" +#}
+        {#        "          <option value=\"custom\">自定义</option>\n" +#}
+        {#        "        </select>\n" +#}
+        {#        "    </div>\n" +#}
+        {#        "</div>");#}
+        {#    idofselect = idofselect+1;        });#}
+
+    </script>
+    <script>
+        document.getElementById("ptitle").value = document.getElementById("title_in_plan").innerHTML;
+        document.getElementById("description").value = document.getElementById("content_in_plan").innerHTML;
+        document.getElementById("dateofdateplan").value = document.getElementById("day_date_in_plan").innerHTML;
+        document.getElementById("timeofdateplan").value = document.getElementById("day_time_in_plan").innerHTML;
+    </script>
+{% endblock corejs %}

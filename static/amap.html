@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>日迹 </title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!--全局样式-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-icon-style.css">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+
+</head>
+
+<body> 
+
+<!--====================================================
+                         页眉导航
+======================================================-->        
+<header class="header">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="search-box">
+                <button class="dismiss"><i class="icon-close"></i></button>
+                <form id="searchForm" action="#" role="search">
+                    <input type="search" placeholder="Search Now" class="form-control">
+                </form>
+            </div>
+            <div class="container-fluid ">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header">
+                        <a href="aindex.html" class="navbar-brand">
+                            <div class="brand-text brand-big hidden-lg-down"><img src="img/logo-white.png" alt="Logo" class="img-fluid"></div>
+                            <div class="brand-text brand-small"><img src="img/logo-icon.png" alt="Logo" class="img-fluid"></div>
+                        </a>
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                    <!-- 全屏-->
+                    <li class="nav-item d-flex align-items-center full_scr_exp"><a class="nav-link" href="#"><img src="img/expand.png" onclick="toggleFullScreen(document.body)" class="img-fluid" alt=""></a></li>
+                    <!-- 搜索-->
+                    <li class="nav-item d-flex align-items-center"><a id="search" class="nav-link" href="#"><i class="icon-search"></i></a></li>
+                    <!-- 日程提醒完成情况-->
+                    <li class="nav-item dropdown"> 
+                        <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="noti-numb-bg"></span><span class="badge">12</span></a>
+                        <ul aria-labelledby="notifications" class="dropdown-menu">
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-envelope bg-red"></i>You have 6 new messages </div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-upload bg-blue"></i>Server Rebooted</div>
+                                        <div class="notification-time"><small>4 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>
+                                        <div class="notification-time"><small>10 minutes ago</small></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
+                        </ul>
+                    </li>
+                    <!-- 消息                     -->
+                    <li class="nav-item dropdown"> <a id="messages" class="nav-link logout" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope-o"></i><span class="noti-numb-bg"></span><span class="badge">10</span></a>
+                        <ul aria-labelledby="messages" class="dropdown-menu">
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Jason Doe</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Frank Williams</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5 msg-nav-h3">Ashley Wood</h3><span>Sent You Message</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong></a></li>
+                        </ul>
+                    </li> 
+                    <!-- <li class="nav-item dropdown"><a id="profile" class="nav-link logout" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle" style="height: 30px; width: 30px;"></a>
+                        <ul aria-labelledby="profile" class="dropdown-menu profile">
+                            <li>
+                                <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                    <div class="msg-profile"> <img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle"></div>
+                                    <div class="msg-body">
+                                        <h3 class="h5">神秘大佬</h3><span>碉堡了</span>
+                                    </div>
+                                </a>
+                                <hr>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="profile.html" class="dropdown-item">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-user "></i>My Profile</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="profile.html" class="dropdown-item">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-envelope-o"></i>Inbox</div> 
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="profile.html" class="dropdown-item">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-cog"></i>Setting</div>
+                                    </div>
+                                </a>
+                                <hr>
+                            </li>
+                            <li>
+                                <a rel="nofollow" href="profile.html" class="dropdown-item">
+                                    <div class="notification">
+                                        <div class="notification-content"><i class="fa fa-power-off"></i>Logout</div>
+                                    </div>
+                                </a> 
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li class="nav-item d-flex align-items-center"><a id="menu-toggle-right" class="nav-link" href="#"><i class="fa fa-group"></i></a></li>
+                    <nav id="sidebar-wrapper">
+                      <div class="sidebar-nav"> 
+                        <div class="tab" role="tabpanel"> 
+<!--                             <ul class="nav nav-tabs" role="tablist">
+                              <li class="nav-item ">
+                                <a class="nav-link active" href="#live" role="tab" data-toggle="tab"><i class="fa fa-globe"></i> Live</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#trend" role="tab" data-toggle="tab"><i class="fa fa-rocket"></i> Trending</a>
+                              </li> 
+                            </ul>  -->
+                            <div class="tab-content tabs">
+                              <div role="tabpanel" class="tab-pane fade show active" id="live">
+                                <h3>我的好友</h3>
+                                <hr>
+                                <div class="list-group">
+                                      <button type="button" class="list-group-item list-group-item-action active">
+                                        爸爸
+                                      </button>
+                                      <button type="button" class="list-group-item list-group-item-action">妈妈</button>
+                                      <button type="button" class="list-group-item list-group-item-action">爷爷</button>
+                                      <button type="button" class="list-group-item list-group-item-action">奶奶</button>
+  
+                                </div>
+                              </div>
+                              <!-- <div role="tabpanel" class="tab-pane fade" id="trend">
+                                <div class="card card-c2" style="box-shadow: 0 0 0;">
+                                    <div class="header">
+                                        <h3 class="title">Trending Items</h3>
+                                        <p class="category">Last Campaign Performance</p>
+                                    </div>
+                                    <div class="content">
+                                        <canvas class="ct-chart" id="myChart4" height="250"></canvas>
+                                        <div class="footer">
+                                            <div class="legend">
+                                                <i class="fa fa-circle text-info"></i> Open
+                                                <i class="fa fa-circle text-danger"></i> Bounce
+                                                <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                            </div>
+                                            <hr>
+                                            <div class="stats">
+                                                <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div> -->
+                           </div>
+                      </div>
+                    </nav>
+                </ul> 
+            </div>
+        </nav>
+    </header>
+
+<!--====================================================
+                        页面内容
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+
+        <!--***** 左侧导航栏 *****-->
+        <nav class="side-navbar">
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="img/avatar-1.png" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">匿名用户</h1>
+                </div>
+            </div>
+            <hr>
+            <!-- 左侧导航栏菜单-->
+            <ul class="list-unstyled">
+                <li class="active"> <a href="aindex.html"><i class="icon-home"></i>我的主页</a></li>
+                <li><a href="#apps" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cog"></i>管理模式 </a>
+                    <ul id="apps" class="collapse list-unstyled">
+                        <li><a href="#">添加计划</a></li>  
+                        <li><a href="#">添加纪念日倒计时</a></li>
+                        <li><a href="#">日程回收站</a></li>  
+                    </ul>
+                </li>
+                <li><a href="#forms" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-book"></i>阅读模式 </a>
+                    <ul id="forms" class="collapse list-unstyled">
+                        <li><a href="#timequadrant" aria-expanded="false" data-toggle="collapse">时间象限视图</a>
+                            <ul id="timequadrant" class="collapse list-unstyled">
+                                <li><a href="#">&nbsp&nbsp&nbsp今天</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp将来一周</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp将来一个月</a></li> 
+                            </ul>
+
+                        </li> 
+                        <li><a href="#calendarview" aria-expanded="false" data-toggle="collapse">时间轴视图</a>
+                            <ul id="calendarview" class="collapse list-unstyled">
+                                <li><a href="#">&nbsp&nbsp&nbsp日计划</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp周计划</a></li> 
+                                <li><a href="#">&nbsp&nbsp&nbsp月计划</a></li>
+                                  
+                            </ul>
+
+                        </li>
+                        <li><a href="#">日历视图</a></li>
+                        <li><a href="form-layouts.html">最近完成</a></li>
+
+                    </ul>
+                </li>
+                <li> <a href="maps.html"> <i class="fa fa-cogs"></i>设置 </a></li>
+
+        </nav>
+
+        <div class="content-inner chart-cont">
+            <div class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">阅读模式</a></li>
+                    <li class="breadcrumb-item"><a href="#">时间象限视图</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">今天</li>
+                  </ol>
+                </nav>
+            </div>
+
+            <!--***** CONTENT *****-->     
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card map p-2">
+                        <div style="height: 400px;text-align: center">
+<!--                             <div style="color: red;font-size: 26px">很重要很紧急</div> -->
+                            <button type="button" class="btn btn-danger" style="width: 400px;height:45px;margin: 20px auto 10px auto;font-size: 22px">很重要很紧急</button>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Dapibus ac facilisis in</li>
+
+                                      
+                                    <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
+                                    <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
+                                    <li class="list-group-item list-group-item-success">This is a success list group item</li>
+                                    <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
+
+                                </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card map p-2">
+                        <div style="height: 400px;text-align: center">
+<!--                             <div style="color: orange;font-size: 26px">很重要不紧急</div> -->
+                            <button type="button" class="btn btn-warning" style="width: 400px;height:45px;margin: 20px auto 10px auto;font-size: 22px;color: #fff">很重要不紧急</button>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Dapibus ac facilisis in</li>
+
+                                      
+                                    <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
+                                    <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
+                                    <li class="list-group-item list-group-item-success">This is a success list group item</li>
+                                    <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
+
+                                </ul>
+                            <!-- <div style="margin: auto;margin: 100px auto 0px auto;font-size: 25px;color: #aaa">暂时没有啦</div> -->
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card map p-2">
+                        <div style="height: 400px;text-align: center">
+<!--                             <div style="color: yellow;font-size: 26px">不重要很紧急</div> -->
+                            <button type="button" class="btn btn-primary" style="width: 400px;height:45px;margin: 20px auto 0px auto;font-size: 22px">不重要很紧急</button>
+                            <div style="margin: auto;margin: 100px auto 0px auto;font-size: 25px;color: #aaa">暂时没有啦</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card map p-2">
+                        <div style="height: 400px;text-align: center">
+<!--                             <div style="color: green;font-size: 26px">不重要不紧急</div> -->
+                            <button type="button" class="btn btn-success" style="width: 400px;height:45px;margin: 20px auto 0px auto;font-size: 22px">不重要不紧急</button>
+                            <div style="margin: auto;margin: 100px auto 0px auto;font-size: 25px;color: #aaa">暂时没有啦</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div> 
+
+        </div>
+    </div> 
+
+    <!--Global Javascript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.validate.min.js"></script> 
+    <script src="js/chart.min.js"></script> 
+    <script src="js/front.js"></script>
+    
+    <!--Core Javascript -->
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript">      </script>
+    
+</body>
+
+</html>

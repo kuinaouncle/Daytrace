@@ -1,0 +1,97 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/apps/email.css' %}">
+{% endblock corecss %}
+
+
+{% block page_content %}
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="border-bottom: 2px solid #009966;width: 100%;">
+            <li class="breadcrumb-item"><a href="/user/">主页</a></li>
+            <li class="breadcrumb-item"><a >管理模式</a></li>
+            <li class="breadcrumb-item active" aria-current="page">日程回收站</li>
+          </ol>
+        </nav>
+
+    </div>
+    <div class="row" id="emails-cont">
+
+
+                <div class="mail-box">
+
+                    <aside class="lg-side">
+                        <div class="inbox-body">
+                            <div class="mail-option">
+                                <div class="btn-group hidden-phone">
+                                    <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+                                         <input type="checkbox" class="mail-checkbox mail-group-checkbox" onclick="$('input[type=\'checkbox\']').prop('checked',true);"> 全选
+                                         <i class="fa fa-angle-down "></i>
+                                     </a>
+                                    <ul class="dropdown-menu drop-inbox">
+                                        <li><a href="#" onclick="$('input[type=\'checkbox\']').prop('checked',true);"><i class="fa fa-check"></i> 全选</a></li>
+                                        <li><a href="#" onclick="$('input[type=\'checkbox\']').prop('checked',false);"><i class="fa fa-ban"></i> 全不选</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group hidden-phone">
+                                    <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+                                     选择操作
+                                     <i class="fa fa-angle-down "></i>
+                                 </a>
+                                    <ul class="dropdown-menu drop-inbox">
+                                        <li><a href="#" id="recycle_btn"><i class="fa fa-recycle"></i> 回收</a></li>
+                                        <li><a href="#"><i class="fa fa-trash-o"></i> 删除</a></li>
+                                    </ul>
+                                </div>
+
+                                <ul class="unstyled inbox-pagination">
+                                    <li><span>1-{{ count }} of {{ count }}</span></li> {# bug #}
+                                    <li>
+                                        <a class="np-btn disabled" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="np-btn disabled" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <table class="table table-inbox table-hover">
+                                <tbody>
+                                    {% for plan in deletedplan %}
+                                        <tr class="">
+                                            <td class="inbox-small-cells">
+                                                <input type="checkbox" class="mail-checkbox plancheckbox">
+                                            </td>
+                                            <div style="display: none" class="planid" id="planid{{ plan.id }}">{{ plan.id }}</div>
+                                            <td class="view-message  dont-show">{{ plan.title }}</td>
+                                            <td class="view-message" style="display: block;width: 350px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{ plan.content }}</td>
+                                            <td class="view-message  inbox-small-cells"></td>
+                                            <td class="view-message  text-right">{{ plan.startdate|date:"Y-m-d" }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+{% endblock page_content %}
+
+{% block corejs %}
+    <script>
+        $("#recycle_btn").click(function () {
+            $.post("/user/recycle/",{
+                planid: 28
+            },
+            function (data) {
+                location.href = '/user/'
+            })
+        })
+
+    </script>
+{% endblock corejs %}

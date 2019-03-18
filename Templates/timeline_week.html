@@ -1,0 +1,76 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/ui-elements/timeline.css' %}">
+{% endblock corecss %}
+
+
+{% block page_content %}
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="border-bottom: 2px solid #009966;width: 100%;">
+            <li class="breadcrumb-item"><a href="/user/">主页</a></li>
+            <li class="breadcrumb-item"><a >阅读模式</a></li>
+            <li class="breadcrumb-item"><a >时间轴视图</a></li>
+            <li class="breadcrumb-item active" aria-current="page">周计划</li>
+          </ol>
+        </nav>
+
+    </div>
+    <div class="row">
+
+
+
+                <!--***** TIMELINE-2 *****-->
+                <div class="col-md-12 mt-5">
+                    <div class="main-timeline" id="timeline-2">
+{#                        <div class="timeline">#}
+{#                            <div class="timeline-content">#}
+{#                                <span class="year">2018/12/08</span>#}
+{#                                <span class="post">参加实达迪美杯比赛</span>#}
+{#                                <h4 class="title" style="color: red">很重要很紧急</h4>#}
+{#                                <p class="description">前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端写不完我要死了前端</p>#}
+{#                            </div>#}
+{#                        </div>#}
+
+
+                        {% for plan in userplandate %}
+                        <div class="timeline">
+                            <div class="timeline-content">
+                                <span class="year">{{ plan.startdate|date:"Y/m/d" }}&nbsp;&nbsp;<small class="weeknumber">{{ plan.startdate.isocalendar }}</small></span>
+                                <span class="post">{{ plan.title }}</span>
+
+                                    {% if plan.priority == 0 %}
+                                        <h4 class="title" style="color: red">很重要很紧急</h4>
+                                    {% elif plan.priority == 1 %}
+                                        <h4 class="title" style="color: orange">很重要不紧急</h4>
+                                    {% elif plan.priority == 2 %}
+                                        <h4 class="title" style="color: blue">不重要很紧急</h4>
+                                    {% elif plan.priority == 3 %}
+                                        <h4 class="title" style="color: green">不重要不紧急</h4>
+                                    {% endif %}
+
+                                <p class="description">{{ plan.content }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+{% endblock page_content %}
+
+{% block corejs %}
+    <script>
+        $(".weeknumber").text(function(i,origText){
+            return origText.substring(1,5)+"年第"+origText.substring(7,9)+"周";
+          });
+
+    </script>
+{% endblock corejs %}

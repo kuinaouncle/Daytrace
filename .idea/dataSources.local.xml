@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="daytrace" uuid="180003d0-6e70-4d6a-af6b-1c15d9ea79d2">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="MYSQL" exact-version="0.0" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>root</user-name>
+      <introspection-schemas>*:</introspection-schemas>
+    </data-source>
+  </component>
+</project>

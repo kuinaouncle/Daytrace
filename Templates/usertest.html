@@ -1,0 +1,730 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/ui-elements/card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/apps/calendarindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/naranja.min.css' %}">
+{% endblock corecss %}
+
+{% block header %}
+    <header class="header">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="search-box">
+                <button class="dismiss"><i class="icon-close"></i></button>
+                <form id="searchForm" action="#" role="search">
+                    <input type="search" placeholder="Search Now" class="form-control">
+                </form>
+            </div>
+            <div class="container-fluid ">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header">
+                        <a href="/user/" class="navbar-brand">
+                            <div class="brand-text brand-big hidden-lg-down"><img src="{% static 'img/logo-white.png' %}" alt="Logo" class="img-fluid"></div>
+                            <div class="brand-text brand-small"><img src="{% static 'img/logo-icon.png' %}" alt="Logo" class="img-fluid"></div>
+                        </a>
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                    <!-- 全屏-->
+                    <li class="nav-item d-flex align-items-center full_scr_exp"><a class="nav-link" href="#"><img src="{% static 'img/expand.png' %}" onclick="toggleFullScreen(document.body)" class="img-fluid" alt=""></a></li>
+                    <!-- 搜索-->
+                    <li class="nav-item d-flex align-items-center"><a id="search" class="nav-link" href="#"><i class="icon-search fa-lg"></i></a></li>
+                    <!-- 日程提醒完成情况-->
+                    <li class="nav-item dropdown" onclick="narnplan('log');">
+                        <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i><span class="noti-numb-bg"></span><span class="badge">1</span></a>
+                    </li>
+                    <!-- 消息                     -->
+                    <li class="nav-item dropdown" onclick="narnmsg('warn')"> <a id="messages" class="nav-link logout" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope-o fa-lg"></i><span class="noti-numb-bg"></span><span class="badge">1</span></a>
+
+                    </li>
+
+                    <li class="nav-item d-flex align-items-center"><a id="menu-toggle-right" class="nav-link" href="#"><i class="fa fa-group fa-lg"></i></a></li>
+                    <nav id="sidebar-wrapper">
+                      <div class="sidebar-nav">
+                        <div class="tab" role="tabpanel">
+
+                            <div class="tab-content tabs">
+                              <div role="tabpanel" class="tab-pane fade show active" id="live">
+                                <h3>我的好友<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addfriendsmodel" style="margin-left: 45px;background-color: #0b96e5">添加好友</button></h3>
+                                <hr>
+{#                                    <div class="dropdown">#}
+{#                                      <button class="btn dropdown-toggle" type="button" id="friend14" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 5px auto 5px auto;width: 240px;background-color: #eeeeee">#}
+{#                                        秋收冬藏#}
+{#                                      </button>#}
+{#                                      <div class="dropdown-menu" aria-labelledby="friend1">#}
+{#                                          <a class="dropdown-item" data-toggle="modal" data-target="#sendmsg" href="#">发消息</a>#}
+{#                                          <a class="dropdown-item" id="seefriendplan" onclick="var friendname = document.getElementById('friend14').innerHTML.replace(/\s+/g,'');location.href = '/user/friendplan/?target='+friendname;" href="#">查看好友日程</a>#}
+{#                                          <a class="dropdown-item" data-toggle="modal" data-target="#confirmdeletefriend" href="#">删除好友</a>#}
+{#                                          <a class="dropdown-item" data-toggle="modal" data-target="#confirmshieldfriend" href="#">屏蔽好友</a>#}
+{#                                      </div>#}
+{#                                    </div>#}
+                                  {% for friend in userfnd %}
+                                      <div class="dropdown">
+                                      <button class="btn dropdown-toggle" type="button" id="friend{{ friend.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 5px auto 5px auto;width: 240px;background-color: #eeeeee">
+                                        {{ friend.friendname }}
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="friend1">
+                                          <a class="dropdown-item" data-toggle="modal" data-target="#sendmsg" href="#">发消息</a>
+                                          <a class="dropdown-item" id="seefriendplan" onclick="var friendname = document.getElementById('friend{{ friend.id }}').innerHTML.replace(/\s+/g,'');location.href = '/user/friendplan/?target='+friendname;" href="#">查看好友日程</a>
+                                          <a class="dropdown-item" data-toggle="modal" data-target="#confirmdeletefriend" href="#">删除好友</a>
+                                          <a class="dropdown-item" data-toggle="modal" data-target="#confirmshieldfriend" href="#">屏蔽好友</a>
+                                      </div>
+                                    </div>
+                                  {% endfor %}
+{#                                  <div class="dropdown">#}
+{#                                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 5px auto 5px auto;width: 240px;background-color: #eeeeee">#}
+{#                                        好友2#}
+{#                                      </button>#}
+{#                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#                                          <a class="dropdown-item" href="#">发消息</a>#}
+{#                                          <a class="dropdown-item" href="#">查看好友日程</a>#}
+{#                                          <a class="dropdown-item" href="#">删除好友</a>#}
+{#                                          <a class="dropdown-item" href="#">屏蔽好友</a>#}
+{#                                      </div>#}
+{#                                    </div>#}
+
+                              </div>
+
+                           </div>
+                      </div>
+                    </nav>
+                </ul>
+            </div>
+        </nav>
+    </header>
+{% endblock header %}
+
+{% block page_content %}
+            <div class="row" id="report4">
+                <div class="col-md-3">
+                    <div class="card text-center social-bottom sb-fb">
+                       <!--  <i class="fa fa-facebook"></i> -->
+                        <i class="fa fa-calendar fa-inverse fa-2x"></i>
+                        <div>{{ userstat.planamount }}</div>
+                        <p>日程总数</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center social-bottom sb-tw">
+                       <!--  <i class="fa fa-twitter"></i> -->
+                       <i class="fa fa-calendar-check-o fa-inverse fa-2x"></i>
+                        <div>{{ userstat.compamount }}</div>
+                        <p>已完成</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center social-bottom sb-gp">
+                      <!--   <i class="fa fa-google-plus"></i> -->
+                      <i class="fa fa-group fa-inverse fa-2x"></i>
+                        <div>{{ userstat.friends_amount }}</div>
+                        <p>好友</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center social-bottom sb-in">
+                      <!--   <i class="fa fa-instagram"></i> -->
+                      <i class="fa fa-calendar-plus-o fa-inverse fa-2x"></i>
+                        <div>{{ userstat.friends_plan_amount }}</div>
+                        <p>好友添加的日程</p>
+                    </div>
+                </div>
+
+            </div>
+
+{#            <div class="row" id="report4">#}
+{#                                <div class="col-md-7">#}
+{#                                   <div class="card" >#}
+{#                                          <div class="card-header" style="font-size: 25px">#}
+{#                                            纪念日倒计时#}
+{#                                          </div>#}
+{##}
+{#                                            <div class="card-deck mr-auto">#}
+{#                                                <div class="card-body">#}
+{#                                                    <div class="card bg-light mb-3" style="max-width: 18rem;">#}
+{#                                                      <div class="card-body">#}
+{#                                                        <h1 class="card-title">10  <small>天</small></h1>#}
+{#                                                        <p class="card-text">2018/12/08</p>#}
+{#                                                        <p class="card-text">比赛作品提交截止</p>#}
+{#                                                      </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="card-body">#}
+{#                                                    <div class="card bg-light mb-3" style="max-width: 18rem;">#}
+{#                                                      <div class="card-body">#}
+{#                                                        <h1 class="card-title">31  <small>天</small></h1>#}
+{#                                                        <p class="card-text">2018/12/29</p>#}
+{#                                                        <p class="card-text">实达迪美杯决赛</p>#}
+{#                                                      </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="card-body">#}
+{#                                                    <div class="card bg-light mb-3" style="max-width: 18rem;">#}
+{#                                                      <div class="card-body">#}
+{#                                                        <h1 class="card-title">52  <small>天</small></h1>#}
+{#                                                        <p class="card-text">2018/12/29</p>#}
+{#                                                        <p class="card-text">实达迪美杯决赛</p>#}
+{#                                                      </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="card-body">#}
+{#                                                    <div class="card bg-light mb-3" style="max-width: 18rem;">#}
+{#                                                      <div class="card-body">#}
+{#                                                        <h1 class="card-title">186  <small>天</small></h1>#}
+{#                                                        <p class="card-text">2018/12/29</p>#}
+{#                                                        <p class="card-text">实达迪美杯决赛</p>#}
+{#                                                      </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{##}
+{##}
+{#                                            </div>#}
+{##}
+{#                                     </div>#}
+{#                                </div>#}
+{##}
+{#                <div class="col-md-4">#}
+{#                    <div class="card card-c2">#}
+{#                        <div class="dropdown pull-right menu-sett-card" >#}
+{#                            <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                <i class="fa fa-ellipsis-v men"></i>#}
+{#                            </a>#}
+{#                            <ul aria-labelledby="notifications" class="dropdown-menu">#}
+{#                                <li>#}
+{#                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">添加日程</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">进入阅读模式</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <div class="header">#}
+{#                            <h4 class="title">今天的日程</h4>#}
+{#                            <!-- <p class="category">Latest News Update</p> -->#}
+{#                            <hr>#}
+{#                            <div class="col-md-4">#}
+{#                                <div class="card-group">#}
+{#                                        <div class="card-body">#}
+{#                                            <h5 class="card-title">8:00</h5>#}
+{#                                            <p class="card-text">买早饭</p>#}
+{##}
+{#                                        </div>#}
+{#                                        <div class="card-body">#}
+{#                                            <h5 class="card-title">15:00</h5>#}
+{#                                            <p class="card-text">杀人</p>#}
+{##}
+{#                                        </div>#}
+{#                                        <div class="card-body">#}
+{#                                            <h5 class="card-title">21:00</h5>#}
+{#                                            <p class="card-text">放火</p>#}
+{##}
+{#                                        </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+            <div class="row" id="report4">
+                    <div class="col-md-6">
+                        <div class="card card-c2">
+
+                            <div class="dropdown pull-right menu-sett-card" >
+                                <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v men"></i>
+                                </a>
+                                <ul aria-labelledby="notifications" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="/user/addplan/" class="dropdown-item nav-link">添加日程</a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item nav-link">进入阅读模式</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="header">
+                                <h3 class="title">今天的日程</h3>
+
+                                <hr>
+                                <div class="row" id="calendar">
+
+                                    <section id="calendar" class="collectonme">
+{#                                        <div class="week">#}
+{#                                            <div class="day">#}
+{#                                                <div class="thing">#}
+{#                                                    <h1>400&nbsp<small><small>天</small></small></h1>#}
+{#                                                    <hr>#}
+{#                                                    <div>实达迪美杯初赛</div>#}
+{#                                                </div>#}
+{#                                                <span class="date">1</span>#}
+{#                                                <div class="surprise">#}
+{#                                                    <h1>400<small><small>&nbsp&nbsp天</small></small></h1>#}
+{#                                                    <h2>实达迪美杯初赛</h2>#}
+{#                                                    <p>加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码</p>#}
+{#                                                    <a class="button" href="#" >删除</a><a class="button" href="http://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&sharesource=qzone&title=日迹&summary=福州大学实达迪美杯软件设计与服务外包比赛&desc=你的分享简述" >修改</a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                        {% for plan in userplantoday %}
+                                            <div class="week">
+                                            <div class="day" onclick="
+                                                document.getElementById('get_plan_id').innerHTML=document.getElementById('getplanid{{ plan.id }}').innerHTML;
+                                            ">
+                                                <div class="thing">
+                                                    <h1>{{ plan.startdatetime|date:"H:i" }}
+
+                                                            {% if plan.priority == 0 %}
+                                                                <small><small><small style="color: red;font-size: 18px;margin-left: 40px">很重要很紧急</small></small></small>
+                                                            {% elif plan.priority == 1 %}
+                                                                <small><small><small style="color: yellow;font-size: 18px;margin-left: 40px">很重要不紧急</small></small></small>
+                                                            {% elif plan.priority == 2 %}
+                                                                <small><small><small style="color: blue;font-size: 18px;margin-left: 40px">不重要很紧急</small></small></small>
+                                                            {% elif plan.priority == 3 %}
+                                                                <small><small><small style="color: green;font-size: 18px;margin-left: 40px">不重要不紧急</small></small></small>
+                                                            {% endif %}
+
+                                                    </h1>
+                                                    <hr>
+                                                    <div>{{ plan.title }}</div>
+                                                </div>
+                                                <span class="date" style="display: none">2</span>
+                                                <div class="surprise">
+                                                    <div id="getplanid{{ plan.id }}" style="display: none">plan{{ plan.id }}</div>
+                                                    <h1>{{ plan.startdatetime|date:"H:i" }}</h1>
+                                                    <h2>{{ plan.title }}</h2>
+                                                    <p style="margin-bottom: 10px">{{ plan.content }}</p>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmdelete" style="width: 80px">
+                                                      删除
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary modifyitems" onclick="var deltg = document.getElementById('get_plan_id').innerHTML;location.href = '/user/changeplan/?target='+deltg;" style="width: 80px">
+                                                      修改
+                                                    </button>
+                                                    <div class="dropdown" style="display:inline-block">
+                                                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 80px">
+                                                        分享
+                                                      </button>
+                                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#" onclick="location.href='https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://127.0.0.1:8000/user/&sharesource=qzone&title=日迹——分享我的日程&summary=你的分享描述信息'">分享至QQ空间</a>
+                                                        <a class="dropdown-item" href="#" onclick="location.href='http://connect.qq.com/widget/shareqq/index.html?url=http://127.0.0.1:8000/user/&sharesource=qzone&title=日迹——分享我的日程&summary=你的分享描述&desc=你的分享简述'">分享至QQ好友</a>
+                                                        <a class="dropdown-item" href="#" onclick="location.href='http://service.weibo.com/share/share.php?url=http://127.0.0.1:8000/user/&sharesource=weibo&title=日迹——分享我的日程&appkey='">分享至新浪微博</a>
+                                                      </div>
+                                                    </div>
+
+
+
+{#                                                    <a class="button" href="#" >删除</a><a class="button" href="#" >修改</a><a class="button" href="http://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&sharesource=qzone&title=日迹&summary=福州大学实达迪美杯软件设计与服务外包比赛&desc=你的分享简述" >分享</a>#}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {% endfor %}
+
+
+
+                                    </section>
+                                </div>
+
+                                    <div class="card-body" id="iftodayplannotexists">
+                                        <h3 class="card-title">暂时没有啦</h3>
+                                        <p class="card-text">请在管理模式中添加日程</p>
+                                        <a href="addplan/" class="btn btn-primary">去添加</a>
+                                      </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="card" >
+                              <div class="card-header" style="font-size: 26px">
+                                纪念日倒计时
+                              </div>
+                              <div class="row" id="calendar">
+                                    <section id="modal">
+                                        <div class="wrapper">
+                                            <div class="content">
+                                                <div class="close"></div>
+                                                <div class="box"></div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="calendar" class="collectonme">
+
+{#                                        <div class="week">#}
+{#                                            <div class="day">#}
+{#                                                <div class="thing">#}
+{#                                                    <h1>5&nbsp<small><small>天</small></small></h1>#}
+{#                                                    <hr>#}
+{#                                                    <div>实达迪美杯初赛</div>#}
+{#                                                </div>#}
+{#                                                <span class="date">2</span>#}
+{#                                                <div class="surprise">#}
+{#                                                    <h1>5<small><small>&nbsp&nbsp天</small></small></h1>#}
+{#                                                    <h2>实达迪美杯初赛</h2>#}
+{#                                                    <p>加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码加紧写代码</p>#}
+{#                                                    <a class="button" href="#" >删除</a><a class="button" href="http://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&sharesource=qzone&title=日迹&summary=福州大学实达迪美杯软件设计与服务外包比赛&desc=你的分享简述" >修改</a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                        {% for anni in useranni %}
+                                            <div class="week">
+                                                <div class="day">
+                                                    <div class="thing">
+                                                        <h1>{{ anni.during }}&nbsp<small><small>天</small></small></h1>
+                                                        <hr>
+                                                        <div>{{ anni.title }}</div>
+                                                    </div>
+                                                    <span class="date" style="display: none">2</span>
+                                                    <div class="surprise">
+                                                        <h1>{{ anni.during }}<small><small>&nbsp&nbsp天</small></small></h1>
+                                                        <h2>{{ anni.title }}</h2>
+                                                        <p style="margin-bottom: 10px">{{ anni.content }}</p>
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmdelete" style="width: 80px">
+                                                          删除
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary modifyitems" onclick="var deltg = document.getElementById('get_plan_id').innerHTML;location.href = '/user/changeplan/?target='+deltg;" style="width: 80px">
+                                                          修改
+                                                        </button>
+                                                        <div class="dropdown" style="display:inline-block">
+                                                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 80px">
+                                                            分享
+                                                          </button>
+                                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#" onclick="location.href='https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://127.0.0.1:8000/user/&sharesource=qzone&title=日迹——分享我的日程&summary=你的分享描述信息'">分享至QQ空间</a>
+                                                            <a class="dropdown-item" href="#" onclick="location.href='http://connect.qq.com/widget/shareqq/index.html?url=http://127.0.0.1:8000/user/&sharesource=qzone&title=日迹——分享我的日程&summary=你的分享描述&desc=你的分享简述'">分享至QQ好友</a>
+                                                            <a class="dropdown-item" href="#" onclick="location.href='http://service.weibo.com/share/share.php?url=http://127.0.0.1:8000/user/&sharesource=weibo&title=日迹——分享我的日程&appkey='">分享至新浪微博</a>
+                                                          </div>
+                                                        </div>
+{#                                                        <a class="button" href="#" >删除</a><a class="button" href="http://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&sharesource=qzone&title=日迹&summary=福州大学实达迪美杯软件设计与服务外包比赛&desc=你的分享简述" >修改</a>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </section>
+                                </div>
+                                <div class="card-body" style="margin-left: 17px" id="ifanninotexists">
+                                    <h3 class="card-title">暂时没有啦</h3>
+                                    <p class="card-text">请在管理模式中添加纪念日倒计时</p>
+                                    <a href="addanniversary/" class="btn btn-primary">去添加</a>
+                                  </div>
+
+                         </div>
+                    </div>
+            </div>
+            {# 对话框 #}
+            {# 确认删除提示 #}
+            <div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document" style="margin-top: 15%">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">删除日程</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    确认删除吗？
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger deleteitem">删除</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# 添加好友 #}
+            <div class="modal fade" id="addfriendsmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document" style="margin-top: 15%">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addfriendsmodeltitle">添加好友</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group" id="addfriendform">
+                        <label for="recipient-name" class="col-form-label" id="nameoffriend">好友名称</label>
+                        <input type="text" class="form-control" id="addfriendsname" placeholder="请输入要添加的好友名称">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="submitaddfriend">发送添加好友请求</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# 发消息 #}
+            <div class="modal fade" id="sendmsg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document" style="margin-top: 15%">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">发送消息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">发送标题</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">发送内容</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">发送</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# 删除好友 #}
+            <div class="modal fade" id="confirmdeletefriend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document" style="margin-top: 15%">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">删除好友</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    确认删除吗？
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="friend_delete">删除</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# 屏蔽好友 #}
+            <div class="modal fade" id="confirmshieldfriend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document" style="margin-top: 15%">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">屏蔽好友</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    确认屏蔽好友吗？
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="friend_shield">屏蔽</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {# 页面传值数据 #}
+            <div id="userplantodayexists" style="display: none">{{ userplantodayexists }}</div>
+            <div id="useranniexists" style="display: none">{{ useranniexists }}</div>
+            <div id="get_plan_id" style="display: none">1234</div>
+            <div id="get_anni_id" style="display: none">1234</div>
+{% endblock page_content %}
+
+
+{% block corejs %}
+
+    {# 控制日程、纪念日 #}
+    <script>
+      var d = new Date();
+      var todaysDate = d.getDate();
+      var target = $('#calendar .week .day .date');
+
+      target.each(function() {
+          // var day = $(this).html();
+          // if (todaysDate == day) {
+          //     $(this).addClass('today');
+          // }
+          // if (todaysDate < day) {
+          //     $(this).parent().addClass('future');
+          // }
+          // if (todaysDate >= day) {
+              $(this).parent().addClass('past')
+    //      }
+      });
+
+      // handle clicks on days
+
+      $('.day').click(function() {
+          {#document.getElementById("getid").innerHTML = document.getElementById("getplanid");#}
+          if ($(this).hasClass('future')) {
+              $('#modal').addClass('active');
+              $('#modal .wrapper .content .box').html("<h2>Naughty, naughty.</h2> <p>You can't look early! Check back on that day to see what I've left for you.</p>");
+          }
+          if ($(this).hasClass('past')) {
+              var content = $(this).children('.surprise').html();
+              $('#modal').addClass('active');
+              $('#modal .wrapper .content .box').html('');
+              $('#modal .wrapper .content .box').html(content);
+          }
+      });
+
+      // close modal
+
+      $('.close').click(function() {
+          var ultimateParent = $(this).parent().parent().parent();
+          ultimateParent.addClass('moveOut');
+          setTimeout(function() {
+              ultimateParent.removeClass('moveOut').removeClass('active');
+          }, 250);
+      });
+
+      // snow effect customizations
+
+      $(document).snowfall({ flakeCount: 100, collection: '.collectonme', maxSpeed: 10 });
+    </script>
+    {# 控制日程、纪念日显示内容 #}
+    <script>
+
+        if(document.getElementById("userplantodayexists").innerHTML == "True") {
+
+            $("#iftodayplannotexists").hide();
+        }
+        if(document.getElementById("useranniexists").innerHTML == "True") {
+
+            $("#ifanninotexists").hide();
+        }
+
+
+    </script>
+    {# 日程的删除和修改按钮 #}
+    <script>
+        {# 控制删除 #}
+        $(".deleteitem").click(function () {
+            var deltg = document.getElementById("get_plan_id").innerHTML;
+            $.post("/user/del_in_user/",{
+                deletetarget:deltg
+            },
+            function (data) {
+                location.href = '/user/'
+            })
+        });
+        {# 控制修改 #}
+        {#$(".modifyitems").click(function () {#}
+        {#    alert();#}
+        {#    var deltg = document.getElementById("get_plan_id").innerHTML;#}
+        {#    $.post("/user/modify_in_user/",{#}
+        {#        deletetarget:deltg#}
+        {#    },#}
+        {#    function (data) {#}
+        {#        location.href = '/user/'#}
+        {#    })#}
+        //});
+        {# 纪念日删除，修改 #}
+    </script>
+    {# 添加好友按钮 #}
+    <script>
+        $("#submitaddfriend").click(function () {
+            var friendname = document.getElementById("addfriendsname").value;
+            $.post("/user/add_friend_check/",{
+                friendname:friendname
+            },
+            function (data) {
+                if(data.res == 0)
+                {
+                    alert("好友用户名不存在！");
+                    {#$('#nameoffriend').after("<h4 style='display:none;color:red' id='failed'>用户名不存在！</h4>");#}
+                }
+                else if(data.res == 1)
+                {
+                    alert("发送请求成功，请等待对方回应!");
+                    {#$('#addfriendform').append("<h4 style='display:none;color:palegoldenrod' id='failed'>发送请求成功，请等待对方相应</h4>");#}
+                }
+            });
+
+        })
+    </script>
+    {# 页面的消息提示 #}
+    <script>
+        var title='加好友请求';
+        var content = '{{ usermsg.messagecontent }}';
+        function addf() {
+            var fname = content.split(' ')[0];
+            $.post("/user/add_friend/",{
+                friendname:fname,
+                username:'{{ nameofuser }}',
+            },
+            function (data) {
+
+            })
+        }
+		function narnmsg (type) {
+		    naranja()[type]({
+		      title: title,
+		      text: content,
+		      timeout: 'keep',
+		      buttons: [{
+		        text: '知道了',
+		        click: function (e) {
+                    addf();
+                      naranja().success({
+                        title: '通知',
+                        text: '已经添加好友'
+                      });
+		        }
+		      },{
+		        text: '取消',
+		        click: function (e) {
+		          e.closeNotification()
+		        }
+		      }]
+		    })
+		  }
+        var remindtitle = '用户日程提醒';
+        var remindcontent = '标题：'+'{{ userplanremind.content }}';
+        function narnplan (type) {
+		    naranja()[type]({
+		      title: remindtitle,
+		      text: remindcontent,
+		      timeout: 'keep',
+		      buttons: [{
+		        text: '知道了',
+		        click: function (e) {
+
+		          naranja().success({
+		            title: '通知',
+		            text: '已经完成提醒'
+		          })
+		        }
+		      },{
+		        text: '取消',
+		        click: function (e) {
+		          e.closeNotification()
+		        }
+		      }]
+		    })
+		  }
+
+    </script>
+    {# 删除好友与屏蔽好友 #}
+    <script>
+        $("#friend_delete").click(function () {
+            alert("已删除");
+            window.location.href = '/user/';
+        });
+        $("#friend_shield").click(function () {
+            window.location.href = '/user/'
+        })
+    </script>
+{% endblock corejs %}

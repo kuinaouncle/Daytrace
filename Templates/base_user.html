@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>日迹 </title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    
+    <!-- 全局CSS文件 -->
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-icon-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+
+    <!-- 核心样式表 -->
+    {% block corecss %}{% endblock corecss %}
+
+</head>
+
+<body> 
+
+<!--====================================================
+                         页眉的导航
+======================================================-->
+{% block header %}
+    <header class="header">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="search-box">
+                <button class="dismiss"><i class="icon-close"></i></button>
+                <form id="searchForm" action="#" role="search">
+                    <input type="search" placeholder="Search Now" class="form-control">
+                </form>
+            </div>
+            <div class="container-fluid ">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <div class="navbar-header">
+                        <a href="/user/" class="navbar-brand">
+                            <div class="brand-text brand-big hidden-lg-down"><img src="{% static 'img/logo-white.png' %}" alt="Logo" class="img-fluid"></div>
+                            <div class="brand-text brand-small"><img src="{% static 'img/logo-icon.png' %}" alt="Logo" class="img-fluid"></div>
+                        </a>
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                    <!-- 全屏-->
+                    <li class="nav-item d-flex align-items-center full_scr_exp"><a class="nav-link" href="#"><img src="{% static 'img/expand.png' %}" onclick="toggleFullScreen(document.body)" class="img-fluid" alt=""></a></li>
+                    <!-- 搜索-->
+                    <li class="nav-item d-flex align-items-center"><a id="search" class="nav-link" href="#"><i class="icon-search fa-lg"></i></a></li>
+                    <!-- 日程提醒完成情况-->
+                    <li class="nav-item dropdown"> 
+                        <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i>
+{#                            <span class="noti-numb-bg"></span>#}
+{#                            <span class="badge"></span>#}
+                        </a>
+{#                        <ul aria-labelledby="notifications" class="dropdown-menu">#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item nav-link">#}
+{#                                    <div class="notification">#}
+{#                                        <div class="notification-content"><i class="fa fa-envelope bg-red"></i>You have 6 new messages </div>#}
+{#                                        <div class="notification-time"><small>4 minutes ago</small></div>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item nav-link">#}
+{#                                    <div class="notification">#}
+{#                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>#}
+{#                                        <div class="notification-time"><small>4 minutes ago</small></div>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item nav-link">#}
+{#                                    <div class="notification">#}
+{#                                        <div class="notification-content"><i class="fa fa-upload bg-blue"></i>Server Rebooted</div>#}
+{#                                        <div class="notification-time"><small>4 minutes ago</small></div>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item nav-link">#}
+{#                                    <div class="notification">#}
+{#                                        <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2 followers</div>#}
+{#                                        <div class="notification-time"><small>10 minutes ago</small></div>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>#}
+{#                        </ul>#}
+                    </li>
+                    <!-- 消息                     -->
+                    <li class="nav-item dropdown">
+                        <a id="messages" class="nav-link logout" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope-o fa-lg"></i>
+{#                            <span class="noti-numb-bg"></span>#}
+{#                        <span class="badge"></span>#}
+                        </a>
+{#                        <ul aria-labelledby="messages" class="dropdown-menu">#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item d-flex">#}
+{#                                    <div class="msg-profile"> <img src="{% static 'img/avatar-1.png' %}" alt="..." class="img-fluid rounded-circle"></div>#}
+{#                                    <div class="msg-body">#}
+{#                                        <h3 class="h5 msg-nav-h3">Jason Doe</h3><span>Sent You Message</span>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item d-flex">#}
+{#                                    <div class="msg-profile"> <img src="{% static 'img/avatar-1.png' %}" alt="..." class="img-fluid rounded-circle"></div>#}
+{#                                    <div class="msg-body">#}
+{#                                        <h3 class="h5 msg-nav-h3">Frank Williams</h3><span>Sent You Message</span>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a rel="nofollow" href="#" class="dropdown-item d-flex">#}
+{#                                    <div class="msg-profile"> <img src="{% static 'img/avatar-1.png' %}" alt="..." class="img-fluid rounded-circle"></div>#}
+{#                                    <div class="msg-body">#}
+{#                                        <h3 class="h5 msg-nav-h3">Ashley Wood</h3><span>Sent You Message</span>#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong></a></li>#}
+{#                        </ul>#}
+                    </li> 
+
+                    <li class="nav-item d-flex align-items-center"><a id="menu-toggle-right" class="nav-link" href="#"><i class="fa fa-group fa-lg"></i></a></li>
+                    <nav id="sidebar-wrapper">
+                      <div class="sidebar-nav"> 
+                        <div class="tab" role="tabpanel"> 
+
+                            <div class="tab-content tabs">
+                              <div role="tabpanel" class="tab-pane fade show active" id="live">
+                                <h3>我的好友</h3>
+                                <hr>
+                                    <div class="dropdown">
+                                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 5px auto 5px auto;width: 240px;background-color: #eeeeee">
+                                        好友1
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">发消息</a>
+                                          <a class="dropdown-item" href="#">查看好友日程</a>
+                                          <a class="dropdown-item" href="#">删除好友</a>
+                                          <a class="dropdown-item" href="#">屏蔽好友</a>
+                                      </div>
+                                    </div>
+                                  <div class="dropdown">
+                                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 5px auto 5px auto;width: 240px;background-color: #eeeeee">
+                                        好友2
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">发消息</a>
+                                          <a class="dropdown-item" href="#">查看好友日程</a>
+                                          <a class="dropdown-item" href="#">删除好友</a>
+                                          <a class="dropdown-item" href="#">屏蔽好友</a>
+                                      </div>
+                                    </div>
+{#                                <div class="list-group">#}
+{#                                      <button type="button" class="list-group-item list-group-item-action active">#}
+{#                                        爸爸#}
+{#                                      </button>#}
+{#                                      <button type="button" class="list-group-item list-group-item-action">妈妈</button>#}
+{#                                      <button type="button" class="list-group-item list-group-item-action">爷爷</button>#}
+{#                                      <button type="button" class="list-group-item list-group-item-action">奶奶</button>#}
+{#  #}
+{#                                </div>#}
+                              </div>
+
+                           </div>
+                      </div>
+                    </nav>
+                </ul> 
+            </div>
+        </nav>
+    </header>
+{% endblock header %}
+
+<!--====================================================
+                        页面内容
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+
+        <!--***** 左侧导航栏 *****-->
+        {% block side-navbar %}
+        <nav class="side-navbar">
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="{% static 'img/avatar-1.png' %}" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4" id="nameofuser">{{ nameofuser }}</h1>
+                </div>
+            </div>
+            <hr>
+            <!-- 左侧导航栏菜单-->
+            <ul class="list-unstyled">
+                <li class="active"> <a href="/user/"><i class="icon-home"></i>我的主页</a></li>
+                <li><a href="#apps" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cog"></i>管理模式 </a>
+                    <ul id="apps" class="collapse list-unstyled">
+                        <li><a href="/user/addplan/">添加计划</a></li>
+                        <li><a href="/user/addanniversary/">添加纪念日倒计时</a></li>
+                        <li><a href="/user/recover/">日程回收站</a></li>
+                    </ul>
+                </li>
+                <li><a href="#forms" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-book"></i>阅读模式 </a>
+                    <ul id="forms" class="collapse list-unstyled">
+                        <li><a href="#timequadrant" aria-expanded="false" data-toggle="collapse">时间象限视图</a>
+                            <ul id="timequadrant" class="collapse list-unstyled">
+                                <li><a href="/user/map_today/">&nbsp&nbsp&nbsp今天</a></li>
+                                <li><a href="/user/map_thisweek/">&nbsp&nbsp&nbsp未来一周</a></li>
+                                <li><a href="/user/map_thismonth/">&nbsp&nbsp&nbsp未来一个月</a></li>
+                            </ul>
+
+                        </li> 
+                        <li><a href="#calendarview" aria-expanded="false" data-toggle="collapse">时间轴视图</a>
+                            <ul id="calendarview" class="collapse list-unstyled">
+                                <li><a href="/user/timeline_date/">&nbsp&nbsp&nbsp日计划</a></li>
+                                <li><a href="/user/timeline_week/">&nbsp&nbsp&nbsp周计划</a></li>
+                                <li><a href="/user/timeline_month/">&nbsp&nbsp&nbsp月计划</a></li>
+                                  
+                            </ul>
+
+                        </li>
+                        <li><a href="/user/calendar/">日历视图</a></li>
+                        <li><a href="#">最近完成</a></li>
+
+                    </ul>
+                </li>
+                <li> <a href="/user/settings/"> <i class="fa fa-cogs"></i>设置 </a></li>
+
+        </nav>
+        {% endblock side-navbar %}
+        <div class="content-inner">
+            {% block page_content %}
+
+            {% endblock page_content %}
+        </div>
+    </div> 
+
+    <!--全局js -->
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper/popper.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/chart.min.js' %}"></script>
+    <script src="{% static 'js/front.js' %}"></script>
+    <script src="{% static 'js/naranja/naranja.js' %}"></script>
+    
+    <!--核心js -->
+    {% block corejs %}
+    {% endblock corejs %}
+</body>
+
+</html>

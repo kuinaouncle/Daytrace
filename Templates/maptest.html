@@ -1,0 +1,227 @@
+{% extends 'base_user.html' %}
+{% load staticfiles %}
+
+{% block corecss %}
+    <link rel="stylesheet" href="{% static 'css/pages/faq.css' %}">
+{% endblock corecss %}
+
+
+{% block page_content %}
+    <div class="chart-cont">
+        <div class="container">
+              <div class="row">
+
+                <div class="col-md-12" >
+                    <div class="faq-cont" id="FAQ1">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: red"> 很重要很紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-1">
+{#                            <div class="panel panel-default panel-faq">#}
+{#                                <div class="panel-heading">#}
+{#                                    <a data-toggle="collapse" data-parent="#accordion-1" href="#faq-sub-cat1-1">#}
+{#                                        <h4 class="panel-title">#}
+{#                                            FAQ Item Category #1#}
+{#                                            <span class="pull-right"><i class="fa fa-plus"></i></span>#}
+{#                                        </h4>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div id="faq-sub-cat1-1" class="panel-collapse collapse">#}
+{#                                    <div class="panel-body">#}
+{#                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+
+                            {% for plan in userplanp0 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-2" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h4 class="panel-title">
+                                            {{ plan.startdatetime|date:"H:i" }}&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+{#                                            <p>{{ plan.startdatetime|date:"H:i" }}</p>#}
+                                            <span class="pull-right"><i class="fa fa-plus"></i></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ2">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: orange"> 很重要不紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-2">
+{#                            <div class="panel panel-default panel-faq">#}
+{#                                <div class="panel-heading">#}
+{#                                    <a data-toggle="collapse" data-parent="#accordion-2" href="#faq-sub-cat2-1">#}
+{#                                        <h4 class="panel-title">#}
+{#                                            FAQ Item Category #1#}
+{#                                            <span class="pull-right"><i class="fa fa-plus"></i></span>#}
+{#                                        </h4>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div id="faq-sub-cat2-1" class="panel-collapse collapse">#}
+{#                                    <div class="panel-body">#}
+{#                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                            {% for plan in userplanp1 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-1" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h4 class="panel-title">
+                                            {{ plan.startdatetime|date:"H:i" }}&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+                                            <span class="pull-right"><i class="fa fa-plus"></i></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ3">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: blue"> 不重要很紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-3">
+{#                            <div class="panel panel-default panel-faq">#}
+{#                                <div class="panel-heading">#}
+{#                                    <a data-toggle="collapse" data-parent="#accordion-3" href="#faq-sub3-1">#}
+{#                                        <h4 class="panel-title">#}
+{#                                            FAQ Item Category #1#}
+{#                                            <span class="pull-right"><i class="fa fa-plus"></i></span>#}
+{#                                        </h4>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div id="faq-sub3-1" class="panel-collapse collapse">#}
+{#                                    <div class="panel-body">#}
+{#                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+
+                            {% for plan in userplanp2 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-3" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h4 class="panel-title">
+                                            {{ plan.startdatetime|date:"H:i" }}&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+                                            <span class="pull-right"><i class="fa fa-plus"></i></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                    <div class="faq-cont" id="FAQ4">
+                        <div class="faq-heading-cont">
+                            <h3 style="color: green"> 不重要不紧急</h3>
+                        </div>
+                        <div class="panel-group" id="accordion-4">
+{#                            <div class="panel panel-default panel-faq">#}
+{#                                <div class="panel-heading">#}
+{#                                    <a data-toggle="collapse" data-parent="#accordion-4" href="#faq-sub4-1">#}
+{#                                        <h4 class="panel-title">#}
+{#                                            FAQ Item Category #1#}
+{#                                            <span class="pull-right"><i class="fa fa-plus"></i></span>#}
+{#                                        </h4>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div id="faq-sub4-1" class="panel-collapse collapse">#}
+{#                                    <div class="panel-body">#}
+{#                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+
+                            {% for plan in userplanp3 %}
+                            <div class="panel panel-default panel-faq">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-4" href="#faq-sub-cat1-{{ plan.id }}">
+                                        <h4 class="panel-title">
+                                            {{ plan.startdatetime|date:"H:i" }}&nbsp&nbsp&nbsp&nbsp<small>{{ plan.title }}</small>
+                                            <span class="pull-right"><i class="fa fa-plus"></i></span>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="faq-sub-cat1-{{ plan.id }}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{ plan.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><br>
+                </div>
+              </div>
+            </div>
+    </div>
+
+{% endblock page_content %}
+
+{% block corejs %}
+        <script>
+        (function($) {
+
+            var mn = $(".vert-tab");
+            mns = "vert-tab-scrolled";
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > $('header').height()) {
+                    mn.addClass(mns);
+                } else {
+                    mn.removeClass(mns);
+                }
+            });
+
+            "use strict";
+            $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
+              if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)
+              {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                  $('html, body').animate({
+                    scrollTop: (target.offset().top - 22)
+                  }, 700, "easeInOutExpo");
+                  return false;
+                }
+              }
+            });
+
+            $('.collapse').on('show.bs.collapse', function() {
+                var id = $(this).attr('id');
+                $('a[href="#' + id + '"]').closest('.panel-heading').addClass('active-faq');
+                $('a[href="#' + id + '"] .panel-title span').html('<i class="fa fa-minus"></i>');
+            });
+            $('.collapse').on('hide.bs.collapse', function() {
+                var id = $(this).attr('id');
+                $('a[href="#' + id + '"]').closest('.panel-heading').removeClass('active-faq');
+                $('a[href="#' + id + '"] .panel-title span').html('<i class="fa fa-plus"></i>');
+            });
+
+        })(jQuery);
+    </script>
+{% endblock corejs %}
